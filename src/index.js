@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter,  Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux'
+import { store } from './store/configureStore'
 import Content from './component/Content';
 import Navigation from './stateless/Navigation';
 import Footer from './stateless/Footer';
@@ -26,5 +28,8 @@ class WrapInRouter extends React.Component {
 }
 
 
-ReactDOM.render(<WrapInRouter />, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store} >
+    <WrapInRouter />
+  </Provider>, document.getElementById('root'));
 

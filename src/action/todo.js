@@ -1,24 +1,19 @@
-import { SET_DATA } from '../constant.js'
-import { CREATE_TODO } from '../constant.js'
-import { UPDATE_TODO } from '../constant.js'
-import { DELETE_TODO } from '../constant.js'
+import { 
+    REQUEST_TODO_PENDING, 
+    REQUEST_TODO_SUCCESS, 
+    REQUEST_TODO_FAILED
+    } from '../constant.js'
 
-export const setData = (todo) => ({
-    type: SET_DATA,
-    payload: todo
-})
+import axios from 'axios'
 
-export const createTodo = (todo) => ({
-    type: CREATE_TODO,
-    payload: todo
-})
-
-export const updateTodo = (todo) => ({
-    type: UPDATE_TODO,
-    payload: todo
-})
-
-export const deleteTodo = (todo) => ({
-    type: DELETE_TODO,
-    payload: todo
-})
+export const requestTodos = todo => dispatch => {
+    dispatch({type: REQUEST_TODO_PENDING })
+    axios.get(`https://cdc-web-frontend.herokuapp.com/todos`)
+    .then(response => {
+        dispatch({type: REQUEST_TODO_SUCCESS, payload:response.data})
+    })
+    .catch(err => {
+        dispatch({type: REQUEST_TODO_FAILED, payload:err})
+    });
+}
+   

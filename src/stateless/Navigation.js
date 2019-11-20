@@ -8,10 +8,7 @@ function Navigation(props) {
     <nav>
       <ul>
         <li className="left_float">
-          <Link to="/">Home</Link>
-        </li>
-        <li className="left_float">
-          <Link to="/create_player">Create Player</Link>
+          <Link to="/create_player">Create Your Todo</Link>
         </li>
         <li className="right_float">logout</li>
       </ul>
