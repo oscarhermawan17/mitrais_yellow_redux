@@ -1,12 +1,13 @@
 import { 
     REQUEST_TODO_PENDING, 
     REQUEST_TODO_SUCCESS, 
-    REQUEST_TODO_FAILED
-    } from '../constant.js'
+    REQUEST_TODO_FAILED,
+    DELETE_SINGLE_TODO,
+    } from '../constant_todo.js'
 
 import axios from 'axios'
 
-export const requestTodos = todo => dispatch => {
+export const requestTodos = () => dispatch => {
     dispatch({type: REQUEST_TODO_PENDING })
     axios.get(`https://cdc-web-frontend.herokuapp.com/todos`)
     .then(response => {
@@ -16,4 +17,9 @@ export const requestTodos = todo => dispatch => {
         dispatch({type: REQUEST_TODO_FAILED, payload:err})
     });
 }
+
+export const deleteSingleTodo = todo => ({
+    type: DELETE_SINGLE_TODO,
+    payload: todo
+})
    

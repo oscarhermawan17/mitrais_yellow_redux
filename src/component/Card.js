@@ -7,7 +7,7 @@ const Card = (props) =>
             <div>{todo.deadline}</div>
             <div className="manage_btn">
                 <button className="btn gold">Edit</button> &nbsp;
-                <button className="btn merah">Delete</button>
+                <button onClick={() => props.deleteSingleTodo(todo)} className="btn merah">Delete</button>
             </div>
         </div>
     )

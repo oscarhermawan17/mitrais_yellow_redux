@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { requestTodos } from '../action/todo'
+import { requestTodos, deleteSingleTodo } from '../action/todo'
 import Card from './Card'
 
 class Content extends React.Component {
@@ -27,6 +27,12 @@ class Content extends React.Component {
     this.props.onRequestTodos()
   }
 
+  deleteSingleTodo(todo){
+    this.props.onDeleteSingleTodo(todo)
+  }
+
+
+
   componentDidUpdate(prevProps, prevState){
     console.log('prevprops', prevProps)
     console.log('prevstated', prevState)
@@ -44,8 +50,7 @@ class Content extends React.Component {
               <div className={section.style_title_color}>
                 <h4>{section.title}</h4>
               </div>
-              <Card  todos={todos}/>
-              <Card  todos={todos}/>
+              <Card  deleteSingleTodo={(value) => this.deleteSingleTodo(value)} todos={todos}/>
             </div>
           </section>
         )}
@@ -62,6 +67,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onRequestTodos:()=>dispatch(requestTodos()),
+  onDeleteSingleTodo:(todo)=>dispatch(deleteSingleTodo(todo)),
 })  
 
 export default connect(mapStateToProps, mapDispatchToProps)(Content);
