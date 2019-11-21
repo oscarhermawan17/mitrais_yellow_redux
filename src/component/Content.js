@@ -1,12 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { requestTodos, deleteSingleTodo } from '../action/todo'
+import Modal from './Modal'
 import Card from './Card'
 
 class Content extends React.Component {
   constructor(){
     super()
     this.state = {
+      modal:"display_none modal",
       sections: [{
         title:"Your Todo List",
         style_wrapper:"section_1 left_float gold",
@@ -27,16 +29,22 @@ class Content extends React.Component {
     this.props.onRequestTodos()
   }
 
+  createSingleTodo(){
+
+  }
+
+  updateSingleTodo(todo){
+    
+  }
+
   deleteSingleTodo(todo){
     this.props.onDeleteSingleTodo(todo)
   }
 
-
-
   componentDidUpdate(prevProps, prevState){
-    console.log('prevprops', prevProps)
-    console.log('prevstated', prevState)
-    console.log('props', this.props)
+    // console.log('prevprops', prevProps)
+    // console.log('prevstated', prevState)
+    // console.log('props', this.props)
   }
 
   render(){
@@ -44,6 +52,10 @@ class Content extends React.Component {
     return isPending ? <div>loading...</div> :
     (
       <article>
+        <div>
+          <button onClick={() => this.setState({modal:"modal"})}>CREATE NEW TODO</button>
+        </div>
+        <Modal modal={this.state.modal} cancel_modal={() => this.setState({modal:"display_none modal"})}/>
         {this.state.sections.map(section =>
           <section key={section.title} className={section.style_wrapper}>
             <div className="coba">
