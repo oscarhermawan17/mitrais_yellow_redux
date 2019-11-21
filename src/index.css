@@ -1,51 +1,123 @@
 * {
     margin : 0;
-  }
-  
-  header{
-      text-align: center;
-      margin: 20px 0;
-  }
-  
-  nav, footer{
-      background-color: black;
-      color:  white;
-  }
-  
-  footer{
-      text-align: center;
-      padding: 30px 0;
-      margin-top: 300px;
-  }
-  
-  li{
-      list-style-type: none;
-      padding: 15px 15px;
-      text-transform: uppercase;
-  }
-  
-  li a{
-      color: white;
-      text-decoration: none;
-  }
-  
-  .left_float{
-      float:left;
-      
-  }
-  
-  .right_float{
-      float:right;
-  }
-  
-  li:hover{
-      background-color: violet;
-  }
-  
-  .clear_left{
-      clear: left;
-  }
-  
-  .clear_right {
-      clear: right;
-  }
+}
+
+header{
+    margin: 20px 0;
+}
+
+header, section {
+    text-align: center;
+}
+
+nav, footer{
+    background-color: black;
+    color:  white;
+}
+
+footer{
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 300px;
+}
+
+li{
+    list-style-type: none;
+    padding: 15px 15px;
+    text-transform: uppercase;
+}
+
+li a{
+    color: white;
+    text-decoration: none;
+}
+
+.left_float{
+    float:left;
+    
+}
+
+.right_float{
+    float:right;
+}
+
+li:hover{
+    background-color: violet;
+}
+
+.clear_left{
+    clear: left;
+}
+
+.clear_right {
+    clear: right;
+}
+
+article{
+    background-color: chartreuse;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.section_1, .section_2, .section_3{
+    width: 33.33%;
+}
+
+.coba{
+    padding:20px 10px 40px 10px;
+    margin: auto;
+}
+
+.title_content{
+    padding: 12px 0;
+}
+
+.todo_content{
+    margin-top: 10px;
+    background-color: #F4A460;
+}
+
+.manage_btn{
+
+}
+
+.btn{
+    border-color: white;
+    border-radius: 8px;
+    padding: 7px;
+}
+
+
+/* MY OWN COLOR */
+
+.gold{
+    background-color: #FFD700;
+}
+
+.kuning{
+    background-color: yellow;
+}
+
+.merah{
+    background-color: crimson;
+    color: white;
+}
+
+.hijau_muda{
+    background-color: #4CAF50;
+    color: white;
+}
+
+.hijau{
+    background-color: green;
+    color: white;
+}
+
+.biru{
+    background-color: #008CBA;
+    color: white;
+}
+
+.dodgerblue{
+    background-color: #1E90FF
+}
