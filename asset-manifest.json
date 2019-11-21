@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/mitrais_yellow_redux/static/css/main.ad8899e4.chunk.css",
-    "main.js": "/mitrais_yellow_redux/static/js/main.66a443b4.chunk.js",
-    "main.js.map": "/mitrais_yellow_redux/static/js/main.66a443b4.chunk.js.map",
+    "main.css": "/mitrais_yellow_redux/static/css/main.927c0145.chunk.css",
+    "main.js": "/mitrais_yellow_redux/static/js/main.a34b1cb1.chunk.js",
+    "main.js.map": "/mitrais_yellow_redux/static/js/main.a34b1cb1.chunk.js.map",
     "runtime-main.js": "/mitrais_yellow_redux/static/js/runtime-main.f73ef7bb.js",
     "runtime-main.js.map": "/mitrais_yellow_redux/static/js/runtime-main.f73ef7bb.js.map",
-    "static/js/2.6b9ab53c.chunk.js": "/mitrais_yellow_redux/static/js/2.6b9ab53c.chunk.js",
-    "static/js/2.6b9ab53c.chunk.js.map": "/mitrais_yellow_redux/static/js/2.6b9ab53c.chunk.js.map",
+    "static/js/2.efc17eff.chunk.js": "/mitrais_yellow_redux/static/js/2.efc17eff.chunk.js",
+    "static/js/2.efc17eff.chunk.js.map": "/mitrais_yellow_redux/static/js/2.efc17eff.chunk.js.map",
     "index.html": "/mitrais_yellow_redux/index.html",
-    "precache-manifest.fd05c3f1eb5cdaef80d264fdc6ee49bc.js": "/mitrais_yellow_redux/precache-manifest.fd05c3f1eb5cdaef80d264fdc6ee49bc.js",
+    "precache-manifest.c29fedd422696c8c2b37a21985a27625.js": "/mitrais_yellow_redux/precache-manifest.c29fedd422696c8c2b37a21985a27625.js",
     "service-worker.js": "/mitrais_yellow_redux/service-worker.js",
-    "static/css/main.ad8899e4.chunk.css.map": "/mitrais_yellow_redux/static/css/main.ad8899e4.chunk.css.map"
+    "static/css/main.927c0145.chunk.css.map": "/mitrais_yellow_redux/static/css/main.927c0145.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.f73ef7bb.js",
-    "static/js/2.6b9ab53c.chunk.js",
-    "static/css/main.ad8899e4.chunk.css",
-    "static/js/main.66a443b4.chunk.js"
+    "static/js/2.efc17eff.chunk.js",
+    "static/css/main.927c0145.chunk.css",
+    "static/js/main.a34b1cb1.chunk.js"
   ]
 }
