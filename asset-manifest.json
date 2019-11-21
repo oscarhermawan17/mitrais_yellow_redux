@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/mitrais_yellow_redux/static/css/main.ad8899e4.chunk.css",
-    "main.js": "/mitrais_yellow_redux/static/js/main.55a5e800.chunk.js",
-    "main.js.map": "/mitrais_yellow_redux/static/js/main.55a5e800.chunk.js.map",
+    "main.js": "/mitrais_yellow_redux/static/js/main.66a443b4.chunk.js",
+    "main.js.map": "/mitrais_yellow_redux/static/js/main.66a443b4.chunk.js.map",
     "runtime-main.js": "/mitrais_yellow_redux/static/js/runtime-main.f73ef7bb.js",
     "runtime-main.js.map": "/mitrais_yellow_redux/static/js/runtime-main.f73ef7bb.js.map",
     "static/js/2.6b9ab53c.chunk.js": "/mitrais_yellow_redux/static/js/2.6b9ab53c.chunk.js",
     "static/js/2.6b9ab53c.chunk.js.map": "/mitrais_yellow_redux/static/js/2.6b9ab53c.chunk.js.map",
     "index.html": "/mitrais_yellow_redux/index.html",
-    "precache-manifest.0b444916c525ebde2288cc4e8999bab0.js": "/mitrais_yellow_redux/precache-manifest.0b444916c525ebde2288cc4e8999bab0.js",
+    "precache-manifest.fd05c3f1eb5cdaef80d264fdc6ee49bc.js": "/mitrais_yellow_redux/precache-manifest.fd05c3f1eb5cdaef80d264fdc6ee49bc.js",
     "service-worker.js": "/mitrais_yellow_redux/service-worker.js",
     "static/css/main.ad8899e4.chunk.css.map": "/mitrais_yellow_redux/static/css/main.ad8899e4.chunk.css.map"
   },
@@ -16,6 +16,6 @@
     "static/js/runtime-main.f73ef7bb.js",
     "static/js/2.6b9ab53c.chunk.js",
     "static/css/main.ad8899e4.chunk.css",
-    "static/js/main.55a5e800.chunk.js"
+    "static/js/main.66a443b4.chunk.js"
   ]
 }
