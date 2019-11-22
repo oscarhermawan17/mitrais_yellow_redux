@@ -33,8 +33,7 @@ li a{
 }
 
 .left_float{
-    float:left;
-    
+    float:left;  
 }
 
 .right_float{
@@ -54,7 +53,6 @@ li:hover{
 }
 
 article{
-    background-color: chartreuse;
     max-width: 1200px;
     margin: auto;
 }

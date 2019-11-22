@@ -2,10 +2,12 @@ import {
     REQUEST_TODO_PENDING, 
     REQUEST_TODO_SUCCESS, 
     REQUEST_TODO_FAILED,
-    DELETE_SINGLE_TODO,
     POST_CREATE_TODO_PENDING,
     POST_CREATE_TODO_SUCCESS,
-    POST_CREATE_TODO_FAILED
+    POST_CREATE_TODO_FAILED,
+    DELETE_TODO_PENDING,
+    DELETE_TODO_SUCCESS,
+    DELETE_TODO_FAILED
     } from '../constant_todo.js'
 
 const initialStateTodos = {
@@ -26,15 +28,17 @@ export const requestTodos = (state = initialStateTodos, action={}) =>{
         case POST_CREATE_TODO_PENDING :
             return {...state, isPending:true }
         case POST_CREATE_TODO_SUCCESS :
-            let tmp = [...state.todos, action.payload]
-            return {...state, todos:tmp, isPending: false }
+            let post_data = [...state.todos, action.payload]
+            return {...state, todos:post_data, isPending: false }
         case POST_CREATE_TODO_FAILED :
             return {...state, isPending: false }
-        case DELETE_SINGLE_TODO :
-            // let tmp = []
-            let test = state.todos.filter(todo => todo.id !== action.payload.id)
-            // state.todos.forEach(todo => todo.id !== action.payload.id ? tmp.push(todo) : null)
-            return {...state, todos:test}
+        case DELETE_TODO_PENDING :
+            return {...state, isPending:true }
+        case DELETE_TODO_SUCCESS :
+            let delete_data = state.todos.filter(todo => todo.id !== action.payload)
+            return {...state, todos:delete_data, isPending: false }
+        case DELETE_TODO_FAILED :
+            return {...state, isPending: false }
         default:
             return state
     }

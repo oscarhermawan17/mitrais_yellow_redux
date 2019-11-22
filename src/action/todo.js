@@ -2,10 +2,12 @@ import {
     REQUEST_TODO_PENDING, 
     REQUEST_TODO_SUCCESS, 
     REQUEST_TODO_FAILED,
-    DELETE_SINGLE_TODO,
     POST_CREATE_TODO_PENDING,
     POST_CREATE_TODO_SUCCESS,
-    POST_CREATE_TODO_FAILED
+    POST_CREATE_TODO_FAILED,
+    DELETE_TODO_PENDING,
+    DELETE_TODO_SUCCESS,
+    DELETE_TODO_FAILED
 } from '../constant_todo.js'
 
 import axios from 'axios'
@@ -33,8 +35,15 @@ export const createSingleTodo = (todo) => dispatch => {
     });
 }
 
-export const deleteSingleTodo = todo => ({
-    type: DELETE_SINGLE_TODO,
-    payload: todo
-})
+export const deleteSingleTodo = (todo_id) => dispatch => {
+    dispatch({type: DELETE_TODO_PENDING })
+    axios.delete(`https://cdc-web-frontend.herokuapp.com/todos/${todo_id}`)
+    .then(response => {
+        console.log(response)
+        dispatch({type: DELETE_TODO_SUCCESS, payload:todo_id})
+    })
+    .catch(err => {
+        dispatch({type: DELETE_TODO_FAILED, payload:err})
+    });
+}
    
