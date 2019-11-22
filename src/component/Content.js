@@ -3,11 +3,18 @@ import { connect } from 'react-redux'
 import { requestTodos, deleteSingleTodo } from '../action/todo'
 import Modal from './Modal'
 import Card from './Card'
+import { createSingleTodo } from '../action/todo'
 
 class Content extends React.Component {
   constructor(){
     super()
     this.state = {
+      modal_action:"",
+      form_todo:{ // FOR UPDATE AND CREATE TODO
+        description:"",
+        deadline:new Date(),
+        done:false,
+      }, 
       modal:"display_none modal",
       sections: [{
         type:"todo",
@@ -28,19 +35,30 @@ class Content extends React.Component {
     }
   }
 
+  // ADD or EDIT TODO
+  popUpModalTodo(choose, value){
+    if(choose === "upd"){
+      this.setState({form_todo:value}, () => this.setState({modal:"modal"}))
+    } else {
+      let obj = {
+        description:"",
+        deadline:new Date(),
+        done:false, 
+      }
+      this.setState({form_todo:obj}, () => this.setState({modal:"modal"}))
+    }
+    
+  }
+
   sendPropsTodos(value){
     return value === "done" ? this.props.todos.filter(todo => todo.done) : 
     value === "passed" ? this.props.todos.filter(todo => new Date(todo.deadline) < new Date() && !todo.done) :
     value === "todo" ?  this.props.todos.filter(todo => new Date(todo.deadline) > new Date() && !todo.done) : []
   }
 
+  // INITIALIZE TODO DATA, REQUEST FROM SERVER with this.props.onRequestTodos()
   componentDidMount(){
     this.props.onRequestTodos()
-    console.log('hasil ', new Date('2019-11-22T06:00:00.000Z')) // compare time
-  }
-
-  updateSingleTodo(todo){
-    
   }
 
   deleteSingleTodo(todo_id){
@@ -50,8 +68,29 @@ class Content extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState){
-    
+  cancelModal(){
+    let obj ={
+      description:"",
+      deadline:new Date(),
+      done:false,
+    }
+    this.setState({form_todo:obj}, () => this.setState({modal:"display_none modal"}))
+  }
+
+
+  //CREATE NEW SINGLE TODO
+  createSingleTodo(){
+    this.props.onCreateSingleTodo(this.state.form_todo)
+    this.setState({modal:"display_none modal"})
+  }
+
+  onChangeValueTodo(value, target_state){
+    console.log("onchange", this.state.form_todo)
+    let obj = {
+        ...this.state.form_todo,
+        [target_state]:value
+    }
+    this.setState({form_todo:obj})
   }
 
   render(){
@@ -60,16 +99,18 @@ class Content extends React.Component {
     (
       <article>
         <div>
-          <button onClick={() => this.setState({modal:"modal"})}>CREATE NEW TODO</button>
+          <button onClick={() => this.popUpModalTodo("cre")}>CREATE NEW TODO</button>
         </div>
-        <Modal modal={this.state.modal} cancel_modal={() => this.setState({modal:"display_none modal"})}/>
+        <Modal modal={this.state.modal} cancel_modal={() => this.cancelModal()} modal_action={this.state.modal_action} form_todo={this.state.form_todo} 
+          onChangeValueTodo={(value, target_state) => this.onChangeValueTodo(value, target_state)} create_single_todo={() => this.createSingleTodo()}
+        />
         {this.state.sections.map(section =>         
           <section key={section.title} className={section.style_wrapper}>
             <div className="coba">
               <div className={section.style_title_color}>
                 <h4>{section.title}</h4>
               </div>
-              <Card  deleteSingleTodo={(todo_id) => this.deleteSingleTodo(todo_id)} todos={this.sendPropsTodos(section.type)}/>
+              <Card  deleteSingleTodo={(todo_id) => this.deleteSingleTodo(todo_id)} updateSingleTodo={(todo) => this.popUpModalTodo("upd", todo)} todos={this.sendPropsTodos(section.type)}/>
             </div>
           </section>
         )}
@@ -86,6 +127,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+  onCreateSingleTodo: (todo)=>dispatch(createSingleTodo(todo)),
   onRequestTodos:()=>dispatch(requestTodos()),
   onDeleteSingleTodo:(todo_id)=>dispatch(deleteSingleTodo(todo_id)),
 })  

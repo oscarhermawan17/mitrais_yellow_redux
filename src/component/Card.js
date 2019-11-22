@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment'
 
 function date_fe(value){
     return `${new Date(value).getDate()}/${new Date(value).getMonth() + 1}/${new Date(value).getFullYear()} ${new Date(value).getHours()}:${new Date(value).getMinutes()}`
@@ -12,7 +11,7 @@ const Card = (props) => {
                 <div>{todo.description}</div>
                 <div>{date_fe(todo.deadline)}</div>
                 <div className="manage_btn">
-                    <button className="btn gold">Edit</button> &nbsp;
+                    <button onClick={() => props.updateSingleTodo(todo)} className="btn gold">Edit</button> &nbsp;
                     <button onClick={() => props.deleteSingleTodo(todo.id)} className="btn merah">Delete</button>
                 </div>
             </div>
