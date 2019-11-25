@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/mitrais_yellow_redux/precache-manifest.c2ad4a98aa3bdc40fac976d56587eaba.js"
+  "/mitrais_yellow_redux/precache-manifest.bdfb56fe7eac4fb92417c22f76c1743a.js"
 );
 
 self.addEventListener('message', (event) => {
