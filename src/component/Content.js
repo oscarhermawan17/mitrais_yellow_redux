@@ -64,10 +64,22 @@ class Content extends React.Component {
     this.setState({choose_page}, () => this.setState({modal:"modal"})) 
   }
 
-  sendPropsTodos(value){
+  test(value){
     return value === "done" ? this.props.todos.filter(todo => todo.done) : 
     value === "passed" ? this.props.todos.filter(todo => new Date(todo.deadline) < new Date() && !todo.done) :
     value === "todo" ?  this.props.todos.filter(todo => new Date(todo.deadline) > new Date() && !todo.done) : []
+  }
+
+  sendPropsTodos(value, sortBy){
+    if(sortBy === "asc"){
+      let todos = this.test(value)
+      let tmp = todos.sort((a, b) => a - b)
+      return tmp
+    } else if(sortBy === "desc"){
+
+    }
+    else
+      return this.test(value)
   }
 
   // INITIALIZE TODO DATA, REQUEST FROM SERVER with this.props.onRequestTodos()
@@ -117,7 +129,6 @@ class Content extends React.Component {
   }
 
   onChangeDate = deadline => {
-    console.log('deadline', deadline)
     let tmp = {...this.state.form_todo, deadline }
     return this.setState({ form_todo: tmp })
   }
@@ -141,6 +152,10 @@ class Content extends React.Component {
             <div className="coba">
               <div className={section.style_title_color}>
                 <h4>{section.title}</h4>
+              </div>
+              <div>
+                <button className="btn width_50" onClick={() => this.sendPropsTodos(section.type, "asc")}>Sort Asc Date</button>
+                <button className="btn width_50" onClick={() => this.sendPropsTodos(section.type, "desc")}>>Sort Desc Date</button>
               </div>
               <Card  deleteSingleTodo={(todo_id) => this.deleteSingleTodo(todo_id)} updateSingleTodo={(todo) => this.popUpModalTodo("upd", todo)} todos={this.sendPropsTodos(section.type)}/>
             </div>
