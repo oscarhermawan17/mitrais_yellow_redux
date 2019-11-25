@@ -35,6 +35,16 @@ class Content extends React.Component {
     }
   }
 
+  validationDate(date){
+    console.log('hasil ', date)
+    return false
+  }
+
+  validationTodoDescription(description){
+    let reg = /^(?=.{1,30}$)[0-9a-zA-Z&/.,!?@ ]+$/
+    return reg.test(description)
+  }
+
   // ADD or EDIT TODO
   popUpModalTodo(choose, value){
     if(choose === "upd"){
@@ -46,8 +56,7 @@ class Content extends React.Component {
         done:false, 
       }
       this.setState({form_todo:obj}, () => this.setState({modal:"modal"}))
-    }
-    
+    } 
   }
 
   sendPropsTodos(value){
@@ -80,17 +89,28 @@ class Content extends React.Component {
 
   //CREATE NEW SINGLE TODO
   createSingleTodo(){
-    this.props.onCreateSingleTodo(this.state.form_todo)
-    this.setState({modal:"display_none modal"})
+    if(!this.validationDate(this.state.form_todo.deadline))
+      alert("Please input true Deadline")
+    else if(!this.validationTodoDescription(this.state.form_todo.description))
+      alert("Description incorect, maximum letter is 30 and just use a-Z 0-9 and &/.,!?@[space]")
+    else{
+      this.props.onCreateSingleTodo(this.state.form_todo)
+      this.setState({modal:"display_none modal"})
+    }
+    
   }
 
   onChangeValueTodo(value, target_state){
-    console.log("onchange", this.state.form_todo)
     let obj = {
         ...this.state.form_todo,
         [target_state]:value
     }
     this.setState({form_todo:obj})
+  }
+
+  onChangeDate = deadline => {
+    let tmp = {...this.state.form_todo, deadline }
+    return this.setState({ form_todo: tmp })
   }
 
   render(){
@@ -103,6 +123,7 @@ class Content extends React.Component {
         </div>
         <Modal modal={this.state.modal} cancel_modal={() => this.cancelModal()} modal_action={this.state.modal_action} form_todo={this.state.form_todo} 
           onChangeValueTodo={(value, target_state) => this.onChangeValueTodo(value, target_state)} create_single_todo={() => this.createSingleTodo()}
+          onChangeDate={this.onChangeDate}
         />
         {this.state.sections.map(section =>         
           <section key={section.title} className={section.style_wrapper}>
