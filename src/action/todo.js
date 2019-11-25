@@ -5,12 +5,28 @@ import {
     POST_CREATE_TODO_PENDING,
     POST_CREATE_TODO_SUCCESS,
     POST_CREATE_TODO_FAILED,
+    PUT_UPDATE_TODO_PENDING,
+    PUT_UPDATE_TODO_SUCCESS,
+    PUT_UPDATE_TODO_FAILED,
     DELETE_TODO_PENDING,
     DELETE_TODO_SUCCESS,
     DELETE_TODO_FAILED
 } from '../constant_todo.js'
 
 import axios from 'axios'
+
+export const createSingleTodo = (todo) => dispatch => {
+    dispatch({type: POST_CREATE_TODO_PENDING })
+    axios.post(`https://cdc-web-frontend.herokuapp.com/todos`, todo)
+    .then(response => {
+        console.log(response)
+        dispatch({type: POST_CREATE_TODO_SUCCESS, payload:response.data})
+    })
+    .catch(err => {
+        dispatch({type: POST_CREATE_TODO_FAILED, payload:err})
+    });
+}
+
 
 export const requestTodos = () => dispatch => {
     dispatch({type: REQUEST_TODO_PENDING })
@@ -23,15 +39,15 @@ export const requestTodos = () => dispatch => {
     });
 }
 
-export const createSingleTodo = (todo) => dispatch => {
-    dispatch({type: POST_CREATE_TODO_PENDING })
-    axios.post(`https://cdc-web-frontend.herokuapp.com/todos`, {...todo})
+export const updateSingleTodo = (todo) => dispatch => {
+    console.log('TOOODOOO', todo)
+    dispatch({type: PUT_UPDATE_TODO_PENDING })
+    axios.put(`https://cdc-web-frontend.herokuapp.com/todos/${todo.id}`, todo)
     .then(response => {
-        console.log(response)
-        dispatch({type: POST_CREATE_TODO_SUCCESS, payload:response.data})
+        dispatch({type: PUT_UPDATE_TODO_SUCCESS, payload:todo})
     })
     .catch(err => {
-        dispatch({type: POST_CREATE_TODO_FAILED, payload:err})
+        dispatch({type: PUT_UPDATE_TODO_FAILED, payload:err})
     });
 }
 

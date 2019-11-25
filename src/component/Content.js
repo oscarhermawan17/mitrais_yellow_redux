@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { requestTodos, deleteSingleTodo } from '../action/todo'
-import Modal from './Modal'
+import { requestTodos, deleteSingleTodo, createSingleTodo, updateSingleTodo } from '../action/todo'
 import Card from './Card'
-import { createSingleTodo } from '../action/todo'
+import Modal from './Modal'
+import DateTimePicker from 'react-datetime-picker'
 import moment from 'moment'
 
 class Content extends React.Component {
@@ -12,10 +12,12 @@ class Content extends React.Component {
     this.state = {
       modal_action:"",
       form_todo:{ // FOR UPDATE AND CREATE TODO
+        id:"",
         description:"",
         deadline:new Date(),
-        done:false,
-      }, 
+        done:true,
+      },
+      choose_page:"",
       modal:"display_none modal",
       sections: [{
         type:"todo",
@@ -36,6 +38,7 @@ class Content extends React.Component {
     }
   }
 
+
   validationDate(date){
     var tmpHours = moment(new Date()).add(2, 'hours');
     return date > tmpHours
@@ -45,19 +48,20 @@ class Content extends React.Component {
     let reg = /^(?=.{1,30}$)[0-9a-zA-Z&/.,!?@ ]+$/
     return reg.test(description)
   }
-
   // ADD or EDIT TODO
-  popUpModalTodo(choose, value){
-    if(choose === "upd"){
-      this.setState({form_todo:value}, () => this.setState({modal:"modal"}))
+  popUpModalTodo(choose_page, value){
+    if(choose_page === "upd"){
+      console.log("masuk upd", choose_page, value)
+      this.setState({form_todo:value}, () => console.log(this.state.form_todo))
     } else {
       let obj = {
         description:"",
         deadline:new Date(),
         done:false, 
       }
-      this.setState({form_todo:obj}, () => this.setState({modal:"modal"}))
-    } 
+      this.setState({form_todo:obj})
+    }
+    this.setState({choose_page}, () => this.setState({modal:"modal"})) 
   }
 
   sendPropsTodos(value){
@@ -73,7 +77,7 @@ class Content extends React.Component {
 
   deleteSingleTodo(todo_id){
     var ask_confirm = window.confirm("Are you sure delete this Todo ?");
-    if (ask_confirm == true) {
+    if (ask_confirm === true) {
       this.props.onDeleteSingleTodo(todo_id)
     }
   }
@@ -87,15 +91,19 @@ class Content extends React.Component {
     this.setState({form_todo:obj}, () => this.setState({modal:"display_none modal"}))
   }
 
-
   //CREATE NEW SINGLE TODO
-  createSingleTodo(){
+  createAndUpdateTodo(value){
     if(!this.validationDate(this.state.form_todo.deadline))
       alert("Please input Deadline minimum 2 hours Later")
     else if(!this.validationTodoDescription(this.state.form_todo.description))
       alert("Description incorect, maximum letter is 30 and just use a-Z 0-9 and &/.,!?@[space]")
     else{
-      this.props.onCreateSingleTodo(this.state.form_todo)
+      if(value === "upd")
+        this.props.onUpdateSingleTodo(this.state.form_todo)
+      else if(value === "cre")
+        this.props.onCreateSingleTodo(this.state.form_todo)
+      else
+        alert('wrong')
       this.setState({modal:"display_none modal"})
     }
   }
@@ -109,6 +117,7 @@ class Content extends React.Component {
   }
 
   onChangeDate = deadline => {
+    console.log('deadline', deadline)
     let tmp = {...this.state.form_todo, deadline }
     return this.setState({ form_todo: tmp })
   }
@@ -122,9 +131,11 @@ class Content extends React.Component {
           <button onClick={() => this.popUpModalTodo("cre")}>CREATE NEW TODO</button>
         </div>
         <Modal modal={this.state.modal} cancel_modal={() => this.cancelModal()} modal_action={this.state.modal_action} form_todo={this.state.form_todo} 
-          onChangeValueTodo={(value, target_state) => this.onChangeValueTodo(value, target_state)} create_single_todo={() => this.createSingleTodo()}
-          onChangeDate={this.onChangeDate}
-        />
+          onChangeValueTodo={(value, target_state) => this.onChangeValueTodo(value, target_state)} create_and_update_todo={(value) => this.createAndUpdateTodo(value)}
+          onChangeDate={this.onChangeDate} choose_page={this.state.choose_page}>
+            <DateTimePicker onChange={this.onChangeDate} value={new Date(this.state.form_todo.deadline)}/>
+        </Modal>
+            
         {this.state.sections.map(section =>         
           <section key={section.title} className={section.style_wrapper}>
             <div className="coba">
@@ -149,6 +160,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onCreateSingleTodo: (todo)=>dispatch(createSingleTodo(todo)),
+  onUpdateSingleTodo: (todo)=>dispatch(updateSingleTodo(todo)),
   onRequestTodos:()=>dispatch(requestTodos()),
   onDeleteSingleTodo:(todo_id)=>dispatch(deleteSingleTodo(todo_id)),
 })  
