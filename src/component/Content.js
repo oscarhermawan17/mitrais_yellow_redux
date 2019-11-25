@@ -4,6 +4,7 @@ import { requestTodos, deleteSingleTodo } from '../action/todo'
 import Modal from './Modal'
 import Card from './Card'
 import { createSingleTodo } from '../action/todo'
+import moment from 'moment'
 
 class Content extends React.Component {
   constructor(){
@@ -36,8 +37,8 @@ class Content extends React.Component {
   }
 
   validationDate(date){
-    console.log('hasil ', date)
-    return false
+    var tmpHours = moment(new Date()).add(2, 'hours');
+    return date > tmpHours
   }
 
   validationTodoDescription(description){
@@ -90,14 +91,13 @@ class Content extends React.Component {
   //CREATE NEW SINGLE TODO
   createSingleTodo(){
     if(!this.validationDate(this.state.form_todo.deadline))
-      alert("Please input true Deadline")
+      alert("Please input Deadline minimum 2 hours Later")
     else if(!this.validationTodoDescription(this.state.form_todo.description))
       alert("Description incorect, maximum letter is 30 and just use a-Z 0-9 and &/.,!?@[space]")
     else{
       this.props.onCreateSingleTodo(this.state.form_todo)
       this.setState({modal:"display_none modal"})
     }
-    
   }
 
   onChangeValueTodo(value, target_state){
