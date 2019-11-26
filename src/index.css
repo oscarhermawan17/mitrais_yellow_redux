@@ -75,10 +75,6 @@ article{
     background-color: #F4A460;
 }
 
-.manage_btn{
-
-}
-
 .btn{
     border-color: white;
     padding: 7px;
@@ -109,8 +105,20 @@ article{
     width: 40%;
 }
 
-/* MY OWN COLOR */
+.goto_center{
+    padding: 10px 0;
+    text-align: center;
+}
 
+.simple_page{
+    padding: 1em 0;
+    text-align: center;
+    font-size: 5em;
+}
+
+
+
+/* MY OWN COLOR */
 .gold{
     background-color: #FFD700;
 }

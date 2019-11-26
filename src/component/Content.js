@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { requestTodos, deleteSingleTodo, createSingleTodo, updateSingleTodo, sortingTodo } from '../action/todo'
-import Card from './Card'
-import Modal from './Modal'
+import Card from '../stateless/Card'
+import Modal from '../stateless/Modal'
 import DateTimePicker from 'react-datetime-picker'
 import moment from 'moment'
 
@@ -130,8 +130,8 @@ class Content extends React.Component {
     return isPending ? <div>loading...</div> :
     (
       <article>
-        <div>
-          <button onClick={() => this.popUpModalTodo("cre")}>CREATE NEW TODO</button>
+        <div className="goto_center">
+          <button className="btn" onClick={() => this.popUpModalTodo("cre")}>CREATE NEW TODO</button>
         </div>
         <Modal modal={this.state.modal} cancel_modal={() => this.cancelModal()} modal_action={this.state.modal_action} form_todo={this.state.form_todo} 
           onChangeValueTodo={(value, target_state) => this.onChangeValueTodo(value, target_state)} create_and_update_todo={(value) => this.createAndUpdateTodo(value)}
@@ -145,9 +145,9 @@ class Content extends React.Component {
               <div className={section.style_title_color}>
                 <h4>{section.title}</h4>
               </div>
-              <div>
-                <button className="btn width_50" onClick={() => this.props.onSortingTodo({section:section.type, sortingValue:"asc"})}>Sort Asc Date</button>
-                <button className="btn width_50" onClick={() => this.props.onSortingTodo({section:section.type, sortingValue:"desc"})}>Sort Desc Date</button>
+              <div className="goto_center">
+                <button className="btn" onClick={() => this.props.onSortingTodo({section:section.type, sortingValue:"asc"})}>Sort Asc Date</button> &nbsp;
+                <button className="btn" onClick={() => this.props.onSortingTodo({section:section.type, sortingValue:"desc"})}>Sort Desc Date</button>
               </div>
               <Card  deleteSingleTodo={(todo_id) => this.deleteSingleTodo(todo_id)} updateSingleTodo={(todo) => this.popUpModalTodo("upd", todo)} todos={this.sendPropsTodos(section.type)}/>
             </div>
