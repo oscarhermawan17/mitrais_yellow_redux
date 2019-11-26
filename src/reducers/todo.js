@@ -19,6 +19,13 @@ const initialStateTodos = {
     error: ""
 }
 
+const sortingValue = (todos, sortingValue) => 
+    (sortingValue === "asc" ? 
+        todos.sort((a,b) => (a.deadline > b.deadline) ? 1 : -1) :
+    sortingValue === "desc" ?
+        todos.sort((a,b) => (a.deadline > b.deadline) ? -1 : 1) : [])
+
+    
 export const requestTodos = (state = initialStateTodos, action={}) =>{
     switch(action.type){
         case REQUEST_TODO_PENDING :
@@ -49,6 +56,22 @@ export const requestTodos = (state = initialStateTodos, action={}) =>{
             return {...state, todos:delete_data, isPending: false }
         case DELETE_TODO_FAILED :
             return {...state, isPending: false }
+        case "SORTING" :
+            let sorting_done = state.todos.filter(todo => todo.done)
+            let sorting_todo = state.todos.filter(todo => new Date(todo.deadline) > new Date() && !todo.done)
+            let sorting_passed = state.todos.filter(todo => new Date(todo.deadline) < new Date() && !todo.done)
+            if(action.payload.section === "done"){
+                let tmp_sorting = sortingValue(sorting_done, action.payload.sortingValue)
+                console.log(tmp_sorting)
+                return {...state, todos:[...sorting_todo, ...sorting_passed, ...tmp_sorting]}
+            } else if(action.payload.section === "todo"){
+                let tmp_sorting = sortingValue(sorting_todo, action.payload.sortingValue)
+                return {...state, todos:[...sorting_passed, ...sorting_done, ...tmp_sorting]}
+            } else if(action.payload.section === "passed"){
+                let tmp_sorting = sortingValue(sorting_passed, action.payload.sortingValue)
+                return {...state, todos:[...sorting_todo, ...sorting_done, ...tmp_sorting]}
+            }
+            return {...state, todos:[]}
         default:
             return state
     }

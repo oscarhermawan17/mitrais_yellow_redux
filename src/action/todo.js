@@ -62,4 +62,8 @@ export const deleteSingleTodo = (todo_id) => dispatch => {
         dispatch({type: DELETE_TODO_FAILED, payload:err})
     });
 }
+
+export const sortingTodo = (value) => dispatch => {
+    dispatch({type: "SORTING", payload:value})
+}
    

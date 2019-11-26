@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { requestTodos, deleteSingleTodo, createSingleTodo, updateSingleTodo } from '../action/todo'
+import { requestTodos, deleteSingleTodo, createSingleTodo, updateSingleTodo, sortingTodo } from '../action/todo'
 import Card from './Card'
 import Modal from './Modal'
 import DateTimePicker from 'react-datetime-picker'
@@ -71,14 +71,6 @@ class Content extends React.Component {
   }
 
   sendPropsTodos(value, sortBy){
-    if(sortBy === "asc"){
-      let todos = this.test(value)
-      let tmp = todos.sort((a, b) => a - b)
-      return tmp
-    } else if(sortBy === "desc"){
-
-    }
-    else
       return this.test(value)
   }
 
@@ -154,8 +146,8 @@ class Content extends React.Component {
                 <h4>{section.title}</h4>
               </div>
               <div>
-                <button className="btn width_50" onClick={() => this.sendPropsTodos(section.type, "asc")}>Sort Asc Date</button>
-                <button className="btn width_50" onClick={() => this.sendPropsTodos(section.type, "desc")}>>Sort Desc Date</button>
+                <button className="btn width_50" onClick={() => this.props.onSortingTodo({section:section.type, sortingValue:"asc"})}>Sort Asc Date</button>
+                <button className="btn width_50" onClick={() => this.props.onSortingTodo({section:section.type, sortingValue:"desc"})}>Sort Desc Date</button>
               </div>
               <Card  deleteSingleTodo={(todo_id) => this.deleteSingleTodo(todo_id)} updateSingleTodo={(todo) => this.popUpModalTodo("upd", todo)} todos={this.sendPropsTodos(section.type)}/>
             </div>
@@ -178,6 +170,7 @@ const mapDispatchToProps = dispatch => ({
   onUpdateSingleTodo: (todo)=>dispatch(updateSingleTodo(todo)),
   onRequestTodos:()=>dispatch(requestTodos()),
   onDeleteSingleTodo:(todo_id)=>dispatch(deleteSingleTodo(todo_id)),
+  onSortingTodo:(value)=>dispatch(sortingTodo(value)),
 })  
 
 export default connect(mapStateToProps, mapDispatchToProps)(Content);
