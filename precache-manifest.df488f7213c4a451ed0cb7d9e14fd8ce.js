@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5aca8f165909f04df57a385ab7bf8258",
+    "revision": "a6a6231ecb8cf4bc24bee6bda25bf6eb",
     "url": "/mitrais_yellow_redux/index.html"
   },
   {
-    "revision": "eca997c6d47eeb92a161",
+    "revision": "9abfb023b4ea87624ace",
     "url": "/mitrais_yellow_redux/static/css/2.ef8e8b31.chunk.css"
   },
   {
-    "revision": "01bc1f0544d6a6bfd2d9",
+    "revision": "eccd5053d7605df06295",
     "url": "/mitrais_yellow_redux/static/css/main.ad9a851b.chunk.css"
   },
   {
-    "revision": "eca997c6d47eeb92a161",
-    "url": "/mitrais_yellow_redux/static/js/2.90b963c6.chunk.js"
+    "revision": "9abfb023b4ea87624ace",
+    "url": "/mitrais_yellow_redux/static/js/2.59816faa.chunk.js"
   },
   {
-    "revision": "01bc1f0544d6a6bfd2d9",
-    "url": "/mitrais_yellow_redux/static/js/main.70e6bab6.chunk.js"
+    "revision": "eccd5053d7605df06295",
+    "url": "/mitrais_yellow_redux/static/js/main.dfaf18bb.chunk.js"
   },
   {
     "revision": "e8238b5fd43c225251f3",
