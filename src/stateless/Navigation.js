@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 
 //using 2 style function, with arrow function, or not
-const Navigation = (props) =>
+const Navigation = () =>
   <nav>
     <ul>
       <li className="left_float">

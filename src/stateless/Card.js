@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function date_fe(value){
-    return `${new Date(value).getDate()}/${new Date(value).getMonth() + 1}/${new Date(value).getFullYear()} ${new Date(value).getHours()}:${new Date(value).getMinutes()}`
-}
+const date_fe = value =>
+    `${new Date(value).getDate()}/${new Date(value).getMonth() + 1}/${new Date(value).getFullYear()} ${new Date(value).getHours()}:${new Date(value).getMinutes()}`
+
 
 const Card = (props) => 
     props.todos.map(todo => 
@@ -14,5 +15,9 @@ const Card = (props) =>
                 <button onClick={() => props.deleteSingleTodo(todo.id)} className="btn merah">Delete</button>
             </div>
         </div>)
+
+Card.propTypes = {
+    todos: PropTypes.array
+};
 
 export default Card

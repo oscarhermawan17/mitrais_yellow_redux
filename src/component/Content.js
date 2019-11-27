@@ -45,7 +45,7 @@ class Content extends React.Component {
   }
 
   validationTodoDescription(description){
-    let reg = /^(?=.{1,30}$)[0-9a-zA-Z&/.,!?@ ]+$/
+    let reg = /^(?=.{1,10}$)[0-9a-zA-Z&/.,!?@ ]+$/
     return reg.test(description)
   }
   // ADD or EDIT TODO
@@ -64,14 +64,15 @@ class Content extends React.Component {
     this.setState({choose_page}, () => this.setState({modal:"modal"})) 
   }
 
-  test(value){
+  //split TODOS
+  splitTodoDonePasses(value){
     return value === "done" ? this.props.todos.filter(todo => todo.done) : 
     value === "passed" ? this.props.todos.filter(todo => new Date(todo.deadline) < new Date() && !todo.done) :
     value === "todo" ?  this.props.todos.filter(todo => new Date(todo.deadline) > new Date() && !todo.done) : []
   }
 
   sendPropsTodos(value, sortBy){
-      return this.test(value)
+      return this.splitTodoDonePasses(value)
   }
 
   // INITIALIZE TODO DATA, REQUEST FROM SERVER with this.props.onRequestTodos()
@@ -97,15 +98,17 @@ class Content extends React.Component {
 
   //CREATE NEW SINGLE TODO
   createAndUpdateTodo(value){
-    if(!this.validationDate(this.state.form_todo.deadline))
-      alert("Please input Deadline minimum 2 hours Later")
-    else if(!this.validationTodoDescription(this.state.form_todo.description))
-      alert("Description incorect, maximum letter is 30 and just use a-Z 0-9 and &/.,!?@[space]")
+    if(!this.validationTodoDescription(this.state.form_todo.description))
+      alert("Description incorect, maximum letter is 10 and just use a-Z 0-9 and &/.,!?@[space]")
     else{
       if(value === "upd")
         this.props.onUpdateSingleTodo(this.state.form_todo)
-      else if(value === "cre")
-        this.props.onCreateSingleTodo(this.state.form_todo)
+      else if(value === "cre"){
+        if(!this.validationDate(this.state.form_todo.deadline))
+          alert("Please input Deadline minimum 2 hours Later")
+        else
+          this.props.onCreateSingleTodo(this.state.form_todo)
+      }
       else
         alert('wrong')
       this.setState({modal:"display_none modal"})

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 
 const Modal = (props) =>
 (
@@ -26,11 +27,16 @@ const Modal = (props) =>
         </table>
             {props.choose_page === 'upd' ? 
             <button onClick={() => props.create_and_update_todo("upd")} className="btn">Update Todo</button> : 
-            <button onClick={() => props.create_and_update_todo("cre")} className="btn">Create Todo</button>}
-            
+            <button onClick={() => props.create_and_update_todo("cre")} className="btn">Create Todo</button>} 
             <button onClick={props.cancel_modal} className="btn">Cancel</button>
         </div>
     </div>
 )
+
+Modal.propTypes = {
+    form_todo: PropTypes.object,
+    create_and_update_todo: PropTypes.func,
+    onChangeValueTodo: PropTypes.func,
+};
 
 export default Modal
