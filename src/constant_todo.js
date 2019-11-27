@@ -1,3 +1,5 @@
+export const URL = "https://cdc-web-frontend.herokuapp.com/todos/"
+
 export const REQUEST_TODO_PENDING = "REQUEST_TODO_PENDING"
 export const REQUEST_TODO_SUCCESS = "REQUEST_TODO_SUCCESS"
 export const REQUEST_TODO_FAILED = "REQUEST_TODO_FAILED"

@@ -10,16 +10,16 @@ import {
     PUT_UPDATE_TODO_FAILED,
     DELETE_TODO_PENDING,
     DELETE_TODO_SUCCESS,
-    DELETE_TODO_FAILED
+    DELETE_TODO_FAILED,
+    URL,
 } from '../constant_todo.js'
 
 import axios from 'axios'
 
 export const createSingleTodo = (todo) => dispatch => {
     dispatch({type: POST_CREATE_TODO_PENDING })
-    axios.post(`https://cdc-web-frontend.herokuapp.com/todos`, todo)
+    axios.post(URL, todo)
     .then(response => {
-        console.log(response)
         dispatch({type: POST_CREATE_TODO_SUCCESS, payload:response.data})
     })
     .catch(err => {
@@ -30,7 +30,7 @@ export const createSingleTodo = (todo) => dispatch => {
 
 export const requestTodos = () => dispatch => {
     dispatch({type: REQUEST_TODO_PENDING })
-    axios.get(`https://cdc-web-frontend.herokuapp.com/todos`)
+    axios.get(URL)
     .then(response => {
         dispatch({type: REQUEST_TODO_SUCCESS, payload:response.data})
     })
@@ -40,9 +40,8 @@ export const requestTodos = () => dispatch => {
 }
 
 export const updateSingleTodo = (todo) => dispatch => {
-    console.log('TOOODOOO', todo)
     dispatch({type: PUT_UPDATE_TODO_PENDING })
-    axios.put(`https://cdc-web-frontend.herokuapp.com/todos/${todo.id}`, todo)
+    axios.put(`${URL}${todo.id}`, todo)
     .then(response => {
         dispatch({type: PUT_UPDATE_TODO_SUCCESS, payload:todo})
     })
@@ -53,9 +52,8 @@ export const updateSingleTodo = (todo) => dispatch => {
 
 export const deleteSingleTodo = (todo_id) => dispatch => {
     dispatch({type: DELETE_TODO_PENDING })
-    axios.delete(`https://cdc-web-frontend.herokuapp.com/todos/${todo_id}`)
+    axios.delete(`${URL}${todo_id}`)
     .then(response => {
-        console.log(response)
         dispatch({type: DELETE_TODO_SUCCESS, payload:todo_id})
     })
     .catch(err => {

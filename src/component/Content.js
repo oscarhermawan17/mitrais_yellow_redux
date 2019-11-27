@@ -38,20 +38,21 @@ class Content extends React.Component {
     }
   }
 
-
+  // validation date, mininum 2 hours when create TODO
   validationDate(date){
     var tmpHours = moment(new Date()).add(2, 'hours');
     return date > tmpHours
   }
 
+  // validation description (length, and character allowed)
   validationTodoDescription(description){
     let reg = /^(?=.{1,10}$)[0-9a-zA-Z&/.,!?@ ]+$/
     return reg.test(description)
   }
-  // ADD or EDIT TODO
+
+  // Create or Update TODO
   popUpModalTodo(choose_page, value){
     if(choose_page === "upd"){
-      console.log("masuk upd", choose_page, value)
       this.setState({form_todo:value}, () => console.log(this.state.form_todo))
     } else {
       let obj = {
@@ -64,7 +65,7 @@ class Content extends React.Component {
     this.setState({choose_page}, () => this.setState({modal:"modal"})) 
   }
 
-  //split TODOS
+  //split TODOS from REDUCER to VIEW
   splitTodoDonePasses(value){
     return value === "done" ? this.props.todos.filter(todo => todo.done) : 
     value === "passed" ? this.props.todos.filter(todo => new Date(todo.deadline) < new Date() && !todo.done) :
@@ -80,6 +81,8 @@ class Content extends React.Component {
     this.props.onRequestTodos()
   }
 
+
+  // delete single TODO
   deleteSingleTodo(todo_id){
     var ask_confirm = window.confirm("Are you sure delete this Todo ?");
     if (ask_confirm === true) {
@@ -87,6 +90,7 @@ class Content extends React.Component {
     }
   }
 
+  // Close Modal
   cancelModal(){
     let obj ={
       description:"",
@@ -115,6 +119,7 @@ class Content extends React.Component {
     }
   }
 
+  // Change Todo, (description, and done)
   onChangeValueTodo(value, target_state){
     let obj = {
         ...this.state.form_todo,
@@ -123,6 +128,7 @@ class Content extends React.Component {
     this.setState({form_todo:obj})
   }
 
+  // Function native from react-datetime-picker
   onChangeDate = deadline => {
     let tmp = {...this.state.form_todo, deadline }
     return this.setState({ form_todo: tmp })

@@ -62,7 +62,6 @@ export const requestTodos = (state = initialStateTodos, action={}) =>{
             let sorting_passed = state.todos.filter(todo => new Date(todo.deadline) < new Date() && !todo.done)
             if(action.payload.section === "done"){
                 let tmp_sorting = sortingValue(sorting_done, action.payload.sortingValue)
-                console.log(tmp_sorting)
                 return {...state, todos:[...sorting_todo, ...sorting_passed, ...tmp_sorting]}
             } else if(action.payload.section === "todo"){
                 let tmp_sorting = sortingValue(sorting_todo, action.payload.sortingValue)
