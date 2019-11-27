@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/mitrais_yellow_redux/static/css/main.188395d5.chunk.css",
-    "main.js": "/mitrais_yellow_redux/static/js/main.8063cd29.chunk.js",
-    "main.js.map": "/mitrais_yellow_redux/static/js/main.8063cd29.chunk.js.map",
+    "main.js": "/mitrais_yellow_redux/static/js/main.49070d46.chunk.js",
+    "main.js.map": "/mitrais_yellow_redux/static/js/main.49070d46.chunk.js.map",
     "runtime-main.js": "/mitrais_yellow_redux/static/js/runtime-main.f73ef7bb.js",
     "runtime-main.js.map": "/mitrais_yellow_redux/static/js/runtime-main.f73ef7bb.js.map",
     "static/css/2.ef8e8b31.chunk.css": "/mitrais_yellow_redux/static/css/2.ef8e8b31.chunk.css",
     "static/js/2.d75c7b23.chunk.js": "/mitrais_yellow_redux/static/js/2.d75c7b23.chunk.js",
     "static/js/2.d75c7b23.chunk.js.map": "/mitrais_yellow_redux/static/js/2.d75c7b23.chunk.js.map",
     "index.html": "/mitrais_yellow_redux/index.html",
-    "precache-manifest.737cd89b20fab419a95e17d410c8f746.js": "/mitrais_yellow_redux/precache-manifest.737cd89b20fab419a95e17d410c8f746.js",
+    "precache-manifest.1a0f2bc0b825a931000c3293e2bc0f87.js": "/mitrais_yellow_redux/precache-manifest.1a0f2bc0b825a931000c3293e2bc0f87.js",
     "service-worker.js": "/mitrais_yellow_redux/service-worker.js",
     "static/css/2.ef8e8b31.chunk.css.map": "/mitrais_yellow_redux/static/css/2.ef8e8b31.chunk.css.map",
     "static/css/main.188395d5.chunk.css.map": "/mitrais_yellow_redux/static/css/main.188395d5.chunk.css.map"
@@ -19,6 +19,6 @@
     "static/css/2.ef8e8b31.chunk.css",
     "static/js/2.d75c7b23.chunk.js",
     "static/css/main.188395d5.chunk.css",
-    "static/js/main.8063cd29.chunk.js"
+    "static/js/main.49070d46.chunk.js"
   ]
 }
