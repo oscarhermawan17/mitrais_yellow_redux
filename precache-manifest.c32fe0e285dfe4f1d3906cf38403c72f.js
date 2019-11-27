@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e53f54814ca7c5eef73e8b612300c036",
+    "revision": "6e1745baa3875abae4ed31f259e93e35",
     "url": "/mitrais_yellow_redux/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/mitrais_yellow_redux/static/css/2.ef8e8b31.chunk.css"
   },
   {
-    "revision": "1e7dd5c02480e45e7542",
+    "revision": "c0eeb08b3121aa6ad5d7",
     "url": "/mitrais_yellow_redux/static/css/main.188395d5.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/mitrais_yellow_redux/static/js/2.d75c7b23.chunk.js"
   },
   {
-    "revision": "1e7dd5c02480e45e7542",
-    "url": "/mitrais_yellow_redux/static/js/main.49070d46.chunk.js"
+    "revision": "c0eeb08b3121aa6ad5d7",
+    "url": "/mitrais_yellow_redux/static/js/main.0ac6f3ff.chunk.js"
   },
   {
     "revision": "e8238b5fd43c225251f3",
