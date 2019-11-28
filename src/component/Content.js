@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { requestTodos, deleteSingleTodo, createSingleTodo, updateSingleTodo, sortingTodo } from '../action/todo'
+import { validationDate, validationTodoDescription } from '../function/validation'
+import { splitTodoDonePasses } from '../function/split_board'
 import Card from '../stateless/Card'
 import Modal from '../stateless/Modal'
 import DateTimePicker from 'react-datetime-picker'
-import moment from 'moment'
 
 class Content extends React.Component {
   constructor(){
@@ -38,18 +39,6 @@ class Content extends React.Component {
     }
   }
 
-  // validation date, mininum 2 hours when create TODO
-  validationDate(date){
-    var tmpHours = moment(new Date()).add(2, 'hours');
-    return date > tmpHours
-  }
-
-  // validation description (length, and character allowed)
-  validationTodoDescription(description){
-    let reg = /^(?=.{1,10}$)[0-9a-zA-Z&/.,!?@ ]+$/
-    return reg.test(description)
-  }
-
   // Create or Update TODO
   popUpModalTodo(choose_page, value){
     if(choose_page === "upd"){
@@ -65,16 +54,7 @@ class Content extends React.Component {
     this.setState({choose_page}, () => this.setState({modal:"modal"})) 
   }
 
-  //split TODOS from REDUCER to VIEW
-  splitTodoDonePasses(value){
-    return value === "done" ? this.props.todos.filter(todo => todo.done) : 
-    value === "passed" ? this.props.todos.filter(todo => new Date(todo.deadline) < new Date() && !todo.done) :
-    value === "todo" ?  this.props.todos.filter(todo => new Date(todo.deadline) > new Date() && !todo.done) : []
-  }
-
-  sendPropsTodos(value, sortBy){
-      return this.splitTodoDonePasses(value)
-  }
+  
 
   // INITIALIZE TODO DATA, REQUEST FROM SERVER with this.props.onRequestTodos()
   componentDidMount(){
@@ -102,20 +82,21 @@ class Content extends React.Component {
 
   //CREATE NEW SINGLE TODO
   createAndUpdateTodo(value){
-    if(!this.validationTodoDescription(this.state.form_todo.description))
+    if(!validationTodoDescription(this.state.form_todo.description))
       alert("Description incorect, maximum letter is 10 and just use a-Z 0-9 and &/.,!?@[space]")
     else{
-      if(value === "upd")
+      if(value === "upd"){
         this.props.onUpdateSingleTodo(this.state.form_todo)
-      else if(value === "cre"){
-        if(!this.validationDate(this.state.form_todo.deadline))
-          alert("Please input Deadline minimum 2 hours Later")
-        else
-          this.props.onCreateSingleTodo(this.state.form_todo)
+        this.setState({modal:"display_none modal"})
       }
-      else
-        alert('wrong')
-      this.setState({modal:"display_none modal"})
+      else if(value === "cre"){
+        if(!validationDate(this.state.form_todo.deadline))
+          alert("Please input Deadline minimum 2 hours Later")
+        else {
+          this.props.onCreateSingleTodo(this.state.form_todo)
+          this.setState({modal:"display_none modal"})
+        }
+      }
     }
   }
 
@@ -158,7 +139,7 @@ class Content extends React.Component {
                 <button className="btn" onClick={() => this.props.onSortingTodo({section:section.type, sortingValue:"asc"})}>Sort Asc Date</button> &nbsp;
                 <button className="btn" onClick={() => this.props.onSortingTodo({section:section.type, sortingValue:"desc"})}>Sort Desc Date</button>
               </div>
-              <Card  deleteSingleTodo={(todo_id) => this.deleteSingleTodo(todo_id)} updateSingleTodo={(todo) => this.popUpModalTodo("upd", todo)} todos={this.sendPropsTodos(section.type)}/>
+              <Card  deleteSingleTodo={(todo_id) => this.deleteSingleTodo(todo_id)} updateSingleTodo={(todo) => this.popUpModalTodo("upd", todo)} todos={splitTodoDonePasses(section.type, this.props.todos)}/>
             </div>
           </section>
         )}
