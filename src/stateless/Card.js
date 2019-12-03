@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const date_fe = value =>
-    `${new Date(value).getDate()}/${new Date(value).getMonth() + 1}/${new Date(value).getFullYear()} ${new Date(value).getHours()}:${new Date(value).getMinutes()}`
+const date_fe = value => 
+(`${new Date(value).getDate()}/${new Date(value).getMonth() + 1}/${new Date(value).getFullYear()} ${new Date(value).getHours()}:${new Date(value).getMinutes()}`)
 
 
 const Card = (props) => 

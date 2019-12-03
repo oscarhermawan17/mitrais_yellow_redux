@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card with props snapshot 1`] = `ShallowWrapper {}`;
+
+exports[`Card with props snapshot 2`] = `ShallowWrapper {}`;
+
+exports[`Card with props snapshot 3`] = `ShallowWrapper {}`;

@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const SimplePage = (props) =>
-  <div className="simple_page oke">
+  (<div className="simple_page oke">
       {props.title}
-  </div>
+  </div>)
 
 SimplePage.propTypes = {
     title: PropTypes.string
